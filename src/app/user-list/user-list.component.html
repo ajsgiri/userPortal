@@ -1,0 +1,45 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">User List</h1>
+</div>
+
+<div class="pricing-header mx-auto">
+
+
+  <!-- No data shows when their is no student data available -->
+  <div class="no-data text-center" *ngIf="noData">
+    <p class="nodata-msg">No  Users added yet!</p>
+    <a routerLink="/add-user" class="btn btn-success">
+      <i class="fas fa-plus custom-fa-plus"></i>
+      Add User
+    </a>
+  </div>
+
+  <div class="table-responsive" *ngIf="hideWhenNoStudent">
+    <table class="table table-bordered table-responsive-sm table-responsive-md table-responsive-lg">
+      <thead>
+        <tr>
+          <th scope="col">User Id</th>
+          <th scope="col">Name</th>
+          <th scope="col">Username</th>
+          <th scope="col">Email</th>
+          <th scope="col">Roles</th>
+          <th class="text-center" scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- *ngFor loop iterates over Student array and fetch the student's data -->
+        <!-- paginate pipe will add pagination in student's list, it won't show if items are less then 7 -->
+        <tr *ngFor="let user of userList; let i = index;">
+          <th scope="row">{{user.$key}}</th>
+          <td>{{user.name}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.roles}}</td>
+          <td>
+              <p><a routerLink="/edit-user/{{user.$key}}">Edit</a></p>
+              <button (click)="deleteUser(user)">Delete</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
